@@ -1,13 +1,48 @@
-# NodeJS-Docker-Boilerplate
+# Validate Twilio Request
 
-### References
-- [Run the image as a non-root user](https://devcenter.heroku.com/articles/container-registry-and-runtime#run-the-image-as-a-non-root-user)
-- [Containerizing a Node.js Application for Development With Docker Compose](https://www.digitalocean.com/community/tutorials/containerizing-a-node-js-application-for-development-with-docker-compose)
-- [Environment variables in Compose](https://docs.docker.com/compose/environment-variables/)
-- [Samay1993 / Production-Grade-Workflow ](https://github.com/Samay1993/Production-Grade-Workflow)
-- [Using Docker for Node.js in Development and Production](https://dev.to/alex_barashkov/using-docker-for-nodejs-in-development-and-production-3cgp)
-- [Working with docker bind mounts and node_modules](https://burnedikt.com/dockerized-node-development-and-mounting-node-volumes/)
-- [Local Development with Docker Compose](https://devcenter.heroku.com/articles/local-development-with-docker-compose)
-- [Snyk - 10 best practices to containerize Node.js web applications with Docker](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/)
-- [Snyk - 10 Docker Security Best Practices](https://snyk.io/blog/10-docker-image-security-best-practices/)
-- [Digital Ocean - How To Build a Node.js Application with Docker on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-build-a-node-js-application-with-docker-on-ubuntu-20-04)
+This code based demonstrate how to validate Twilio incoming request that are `application/json`.
+
+## TL;DR:
+
+- If your call from Studio, be sure to minify the request. You can use this [tool](https://codebeautify.org/jsonminifier) to minify your JSON.
+
+
+## Prerequisite
+You will need the following:
+
+- [Twilio Auth Token](https://www.twilio.com/console)
+- [Docker](https://www.docker.com/)
+- [ngrok](https://ngrok.com/)
+
+## Getting Started
+
+### ngrok
+
+1. Execute the following command:
+
+```sh
+$ ngrok http 8080
+```
+
+### Docker
+
+1. Copy the `.env-example` and rename it to be `.env`.
+
+2. Add the following to your `.env` file:
+- TWILIO_AUTH_TOKEN
+- PRODUCTION_URL (i.e. Ngrok Base URL)
+- PORT
+
+3. Execute the following command:
+
+```sh
+$ docker compose -f "docker-compose.yml" up -d --build
+```
+
+### Twilio
+
+1. Go to [Twilio Studio](https://console.twilio.com/us1/develop/studio/flows)
+
+2. Create a new Studio Flow and import the **validate-twilio-request.json**.
+
+3. Set the ngrok url in the `GlobalVariables` widget.

@@ -1,0 +1,126 @@
+{
+    "description": " validate-twilio-request",
+    "states": [
+      {
+        "name": "Trigger",
+        "type": "trigger",
+        "transitions": [
+          {
+            "event": "incomingMessage"
+          },
+          {
+            "event": "incomingCall"
+          },
+          {
+            "event": "incomingConversationMessage"
+          },
+          {
+            "next": "GlobalVariables",
+            "event": "incomingRequest"
+          },
+          {
+            "event": "incomingParent"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      {
+        "name": "NgrokSuccess",
+        "type": "make-http-request",
+        "transitions": [
+          {
+            "next": "NgrokFailure",
+            "event": "success"
+          },
+          {
+            "event": "failed"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": 260,
+            "y": 720
+          },
+          "method": "POST",
+          "content_type": "application/json;charset=utf-8",
+          "body": "{\"Field1\":\"Value\",\"Field2\":{\"InnerField1\":123,\"InnerField2\":true,\"InnerField3\":[1,true,false]}}",
+          "url": "{{flow.variables.ngrokTwilioURL}}"
+        }
+      },
+      {
+        "name": "GlobalVariables",
+        "type": "set-variables",
+        "transitions": [
+          {
+            "next": "GlobalVariables2",
+            "event": "next"
+          }
+        ],
+        "properties": {
+          "variables": [
+            {
+              "value": "https://<<Numbers or Whatever>>.ngrok.io",
+              "key": "ngrokBaseURL"
+            }
+          ],
+          "offset": {
+            "x": 260,
+            "y": 250
+          }
+        }
+      },
+      {
+        "name": "GlobalVariables2",
+        "type": "set-variables",
+        "transitions": [
+          {
+            "next": "NgrokSuccess",
+            "event": "next"
+          }
+        ],
+        "properties": {
+          "variables": [
+            {
+              "value": "{{flow.variables.ngrokBaseURL}}/sms",
+              "key": "ngrokTwilioURL"
+            }
+          ],
+          "offset": {
+            "x": 310,
+            "y": 500
+          }
+        }
+      },
+      {
+        "name": "NgrokFailure",
+        "type": "make-http-request",
+        "transitions": [
+          {
+            "event": "success"
+          },
+          {
+            "event": "failed"
+          }
+        ],
+        "properties": {
+          "offset": {
+            "x": 250,
+            "y": 980
+          },
+          "method": "POST",
+          "content_type": "application/json;charset=utf-8",
+          "body": "{\n    \"Field1\":\"Value\",\n    \"Field2\":{\n        \"InnerField1\":123,\n        \"InnerField2\":true,\n        \"InnerField3\":[\n            1,\n            true,\n            false\n        ]\n    }\n}",
+          "url": "{{flow.variables.ngrokTwilioURL}}"
+        }
+      }
+    ],
+    "initial_state": "Trigger",
+    "flags": {
+      "allow_concurrent_calls": true
+    }
+  }

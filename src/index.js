@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 app.post('/sms', async (req, res) => {
     const {originalUrl, headers, body} = req;
 
-    if(process.env.NODE_ENV === 'production' || true) {
+    if(process.env.NODE_ENV === 'production') {
         const twilioSignature = headers['x-twilio-signature'];
         const fullURL = `${process.env.PRODUCTION_URL}${originalUrl}`;
 
