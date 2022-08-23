@@ -4,7 +4,7 @@ This code based demonstrate how to validate Twilio incoming request that are `ap
 
 ## TL;DR:
 
-- If your call from Studio, be sure to minify the request. You can use this [tool](https://codebeautify.org/jsonminifier) to minify your JSON.
+- If your call from Studio, be sure to minify the JSON. You can use this [tool](https://codebeautify.org/jsonminifier) to minify your JSON.
 
 
 ## Prerequisite
