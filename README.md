@@ -46,3 +46,9 @@ $ docker compose -f "docker-compose.yml" up -d --build
 2. Create a new Studio Flow and import the **validate-twilio-request.json**.
 
 3. Set the ngrok url in the `GlobalVariables` widget.
+
+## Resources:
+
+- [Twilio - Security](https://www.twilio.com/docs/usage/security#notes)
+- [Secure your Express app by validating incoming Twilio requests](https://www.twilio.com/docs/usage/tutorials/how-to-secure-your-express-app-by-validating-incoming-twilio-requests)
+- [How to secure Twilio webhook URLs in Node.js](https://www.twilio.com/blog/how-to-secure-twilio-webhook-urls-in-nodejs)
