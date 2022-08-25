@@ -47,6 +47,12 @@ $ docker compose -f "docker-compose.yml" up -d --build
 
 3. Set the ngrok url in the `GlobalVariables` widget.
 
+## FAQs
+
+1. Does Twilio Functions work with this?
+
+> Not possible at the moment. When testing this out, I notice the Full URL didn't contain the `bodySHA256` url parameter. So your best bet is using Studio or other Twilio Settings.
+
 ## Resources:
 
 - [Twilio - Security](https://www.twilio.com/docs/usage/security#notes)
